@@ -82,6 +82,14 @@
   .tname{font-family:'Newsreader',serif;font-weight:600;font-size:24px;line-height:1.15}
   .tdates{font-size:13px;color:var(--muted);margin-top:3px}
   .tcourses{font-size:13px;color:var(--gold);margin-top:3px;font-weight:500}
+  .engstrip{
+    display:grid;grid-template-columns:26px 1fr;gap:12px;
+    padding:12px;margin:0 -12px 4px;border-radius:6px;
+    background:rgba(200,146,50,.08);border:1px dashed rgba(200,146,50,.45);
+  }
+  .engstrip .eicon{font-family:'Newsreader',serif;font-style:italic;color:var(--gold);font-size:15px;padding-top:1px}
+  .engstrip .etxt{font-size:13.5px;color:#5A5348}
+  .engstrip .etxt b{color:var(--ink);font-weight:600}
   .chev{
     flex:none;margin-top:8px;width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);
     transform:rotate(45deg);transition:transform .18s ease;
@@ -169,7 +177,7 @@
     <div class="slot"><div class="d"></div><div class="what"><b>Recitation, 60–75 min.</b> <span>Exercises, code-along, or problem sets from that lecture. Never two lecture blocks back to back — watch, do, stop.</span></div></div>
     <div class="slot"><div class="d">Saturday</div><div class="what"><b>Lab day, 3–4 hrs.</b> <span>Applied track only: projects, fine-tunes, builds.</span></div></div>
     <div class="slot"><div class="d">Sunday</div><div class="what"><b>Review day, 1–2 hrs.</b> <span>Re-derive the week from memory, update the cheat sheet, take the weekly quiz with Claude, preview next week.</span></div></div>
-    <div class="slot"><div class="d">Daily</div><div class="what"><b>ENG 30 — the engineering half hour.</b> <span>Tooling and fluency: Python drills, shell &amp; git, Docker, serving, ML system design. Focus shifts each term — see the ENG 30 syllabus below. First thing to pause if a week collapses.</span></div></div>
+    <div class="slot"><div class="d">Daily</div><div class="what"><b>ENG 30 — the engineering half hour.</b> <span>Tooling and fluency: Python drills, shell &amp; git, Docker, serving, ML system design. This term's focus is pinned inside each term above the weeks. First thing to pause if a week collapses.</span></div></div>
   </div>
   <p class="note">Attendance policy: miss a day, don't double up — continue. Streaks beat catch-up. Two missed weeks means we re-plan, not cram.</p>
 </section>
@@ -188,6 +196,8 @@
       </div>
       <div class="chev"></div>
     </summary>
+
+    <div class="engstrip"><div class="eicon">eng</div><div class="etxt"><b>ENG 30 this term — Python, then the terminal.</b> Weeks 1–4: one <a href="https://exercism.org/tracks/python">Exercism Python exercise</a> daily. Week 5 on: <a href="https://missing.csail.mit.edu/">MIT Missing Semester</a> — shell, git, debugging. Every commit is practice.</div></div>
 
     <div class="wk" data-id="t1w1" data-start="2026-09-07" data-end="2026-09-20">
       <div class="tick"><input type="checkbox" aria-label="Mark weeks 1–2 complete"></div>
@@ -291,6 +301,8 @@
       <div class="chev"></div>
     </summary>
 
+    <div class="engstrip"><div class="eicon">eng</div><div class="etxt"><b>ENG 30 this term — environments &amp; Docker.</b> conda/venv, pip, reading tracebacks calmly; Docker fundamentals in the weeks before Project 1. Optional re-entry ramp: Advent of Code, Dec 8–25.</div></div>
+
     <div class="wk" data-id="t2w1" data-start="2026-12-14" data-end="2026-12-27">
       <div class="tick"><input type="checkbox" aria-label="Mark re-entry weeks complete"></div>
       <div class="body">
@@ -359,6 +371,8 @@
       <div class="chev"></div>
     </summary>
 
+    <div class="engstrip"><div class="eicon">eng</div><div class="etxt"><b>ENG 30 this term — serving &amp; CI.</b> FastAPI around Projects 2–3, Linux/GPU-box literacy for Runpod, GitHub Actions running the CS336 test suites.</div></div>
+
     <div class="wk" data-id="t3w1" data-start="2027-03-15" data-end="2027-04-18">
       <div class="tick"><input type="checkbox" aria-label="Mark CS224N complete"></div>
       <div class="body">
@@ -416,6 +430,8 @@
       </div>
       <div class="chev"></div>
     </summary>
+
+    <div class="engstrip"><div class="eicon">eng</div><div class="etxt"><b>ENG 30 this term — ML system design.</b> Chip Huyen, one chapter a week, plus mock design interviews with Claude. Data pipelines, training infra, serving, evals, drift.</div></div>
 
     <div class="wk" data-id="t4w1" data-start="2027-06-21" data-end="2027-07-11">
       <div class="tick"><input type="checkbox" aria-label="Mark Silver RL complete"></div>
@@ -557,7 +573,9 @@
     currentWk.classList.add('now');
     var label = currentWk.querySelector('.when').textContent;
     var title = currentWk.querySelector('h3').textContent;
-    where.textContent = 'Now: ' + label + ' — ' + title;
+    var engNames = {term1:'Python drills', term2:'environments & Docker', term3:'serving & CI', term4:'ML system design'};
+    var eng = term && engNames[term.id] ? ' · ENG 30: ' + engNames[term.id] : '';
+    where.textContent = 'Now: ' + label + ' — ' + title + eng;
   } else {
     where.textContent = 'Between scheduled weeks — continue where you left off.';
   }
