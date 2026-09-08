@@ -82,14 +82,12 @@
   .tname{font-family:'Newsreader',serif;font-weight:600;font-size:24px;line-height:1.15}
   .tdates{font-size:13px;color:var(--muted);margin-top:3px}
   .tcourses{font-size:13px;color:var(--gold);margin-top:3px;font-weight:500}
-  .engstrip{
-    display:grid;grid-template-columns:26px 1fr;gap:12px;
-    padding:12px;margin:0 -12px 4px;border-radius:6px;
-    background:rgba(200,146,50,.08);border:1px dashed rgba(200,146,50,.45);
+  .engline{
+    margin-top:9px;padding:8px 10px;border-radius:5px;font-size:13px;color:#5A5348;
+    background:rgba(200,146,50,.09);border-left:2.5px solid var(--gold);
   }
-  .engstrip .eicon{font-family:'Newsreader',serif;font-style:italic;color:var(--gold);font-size:15px;padding-top:1px}
-  .engstrip .etxt{font-size:13.5px;color:#5A5348}
-  .engstrip .etxt b{color:var(--ink);font-weight:600}
+  .engline b{color:#8A6410;font-weight:600}
+  .engline a{color:#8A6410;text-decoration:none;border-bottom:1px solid rgba(200,146,50,.5)}
   .chev{
     flex:none;margin-top:8px;width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);
     transform:rotate(45deg);transition:transform .18s ease;
@@ -197,7 +195,6 @@
       <div class="chev"></div>
     </summary>
 
-    <div class="engstrip"><div class="eicon">eng</div><div class="etxt"><b>ENG 30 this term — Python, then the terminal.</b> Weeks 1–4: one <a href="https://exercism.org/tracks/python">Exercism Python exercise</a> daily. Week 5 on: <a href="https://missing.csail.mit.edu/">MIT Missing Semester</a> — shell, git, debugging. Every commit is practice.</div></div>
 
     <div class="wk" data-id="t1w1" data-start="2026-09-07" data-end="2026-09-20">
       <div class="tick"><input type="checkbox" aria-label="Mark weeks 1–2 complete"></div>
@@ -206,6 +203,7 @@
         <h3>Intuition bootcamp</h3>
         <p><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">3B1B — Essence of Linear Algebra</a>, then <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr">Essence of Calculus</a>, all chapters.</p>
         <p class="quiet">No notes, no exercises. Watch, absorb, rewatch what didn't click.</p>
+        <div class="engline"><b>ENG 30:</b> Join <a href="https://exercism.org/tracks/python">Exercism’s Python track</a> — one exercise a day, starting with Hello World and the Basics set.</div>
       </div>
     </div>
 
@@ -216,6 +214,7 @@
         <h3>Linear algebra, for real</h3>
         <p><a href="https://www.youtube.com/playlist?list=PLiiljHvN6z1_o1ztXTKWPrShrMrBLo5P3">Imperial College — Math for ML: Linear Algebra</a>, 37 videos. About four a day in the lecture block, exercises in recitation.</p>
         <div class="deliv">Deliverable: one-page linear algebra cheat sheet in the repo</div>
+        <div class="engline"><b>ENG 30:</b> Exercism continues — strings, lists, dicts, loops exercises. Aim for ~10 more solved by end of week 4, each committed to <code>eng30/</code>.</div>
       </div>
     </div>
 
@@ -227,6 +226,7 @@
         <p><a href="https://www.youtube.com/playlist?list=PLiiljHvN6z193BBzS0Ln8NnqQmzimTW23">Imperial College — Math for ML: Multivariate Calculus</a>, 43 videos. Same rhythm.</p>
         <p>Deep Learning 101 begins on Saturdays: <a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ">Karpathy — micrograd</a>, typed line by line.</p>
         <div class="deliv">Deliverable: one-page calculus cheat sheet</div>
+        <div class="engline"><b>ENG 30:</b> Switch to <a href="https://missing.csail.mit.edu/">MIT Missing Semester</a> — watch “The Shell” and “Shell Tools &amp; Scripting,” then “Version Control (Git)” the day the repo goes live.</div>
       </div>
     </div>
 
@@ -236,6 +236,7 @@
         <div class="when">Week 7 · DL 101</div>
         <h3>Micrograd, finished · makemore 1</h3>
         <p class="quiet">Every line typed, commented, committed. The repo is the exam.</p>
+        <div class="engline"><b>ENG 30:</b> Missing Semester — “Command-line Environment.” Set up aliases and dotfiles; commit your <code>.zshrc</code> to <code>eng30/</code>.</div>
       </div>
     </div>
 
@@ -244,6 +245,8 @@
       <div class="body">
         <div class="when">Week 8 · DL 101</div>
         <h3>Makemore 2 &amp; 3 — MLPs, activations, BatchNorm</h3>
+        <h3>Makemore 2 &amp; 3 — MLPs, activations, BatchNorm</h3>
+        <div class="engline"><b>ENG 30:</b> Missing Semester — “Debugging and Profiling.” You’ll use pdb on your own makemore bugs this very week.</div>
       </div>
     </div>
 
@@ -253,6 +256,8 @@
         <div class="when">Week 9 · DL 101</div>
         <h3>Makemore 4 &amp; 5 — Backprop Ninja, WaveNet</h3>
         <p class="quiet">The hardest week of the term. That's the point.</p>
+        The hardest week of the term. That's the point.</p>
+        <div class="engline"><b>ENG 30:</b> Pauses this week — Backprop Ninja <em>is</em> the engineering. All 30 minutes go to makemore.</div>
       </div>
     </div>
 
@@ -262,6 +267,8 @@
         <div class="when">Week 10 · DL 101</div>
         <h3>Let's build GPT · State of GPT</h3>
         <p class="quiet">Your first Transformer, from an empty file.</p>
+        Your first Transformer, from an empty file.</p>
+        <div class="engline"><b>ENG 30:</b> Commit-message craft + repo hygiene: read <a href="https://cbea.ms/git-commit/">How to Write a Git Commit Message</a>, then write proper READMEs for your term1 notebooks.</div>
       </div>
     </div>
 
@@ -270,6 +277,8 @@
       <div class="body">
         <div class="when">Week 11 · DL 101</div>
         <h3>GPT Tokenizer · Reproduce GPT-2 (mini, on Colab)</h3>
+        <h3>GPT Tokenizer · Reproduce GPT-2 (mini, on Colab)</h3>
+        <div class="engline"><b>ENG 30:</b> Catch-up week — finish any unfinished Exercism/Missing Semester items before finals.</div>
       </div>
     </div>
 
@@ -301,7 +310,6 @@
       <div class="chev"></div>
     </summary>
 
-    <div class="engstrip"><div class="eicon">eng</div><div class="etxt"><b>ENG 30 this term — environments &amp; Docker.</b> conda/venv, pip, reading tracebacks calmly; Docker fundamentals in the weeks before Project 1. Optional re-entry ramp: Advent of Code, Dec 8–25.</div></div>
 
     <div class="wk" data-id="t2w1" data-start="2026-12-14" data-end="2026-12-27">
       <div class="tick"><input type="checkbox" aria-label="Mark re-entry weeks complete"></div>
@@ -309,6 +317,8 @@
         <div class="when">Weeks 1–2</div>
         <h3>Soft re-entry</h3>
         <p>Re-derive micrograd from memory. Three weeks off will have taken more than you expect — this is the fix, not a judgment.</p>
+        this is the fix, not a judgment.</p>
+        <div class="engline"><b>ENG 30:</b> <a href="https://adventofcode.com/">Advent of Code</a> — one puzzle a day, Dec 14–25. Pure Python reps, festive edition.</div>
       </div>
     </div>
 
@@ -318,6 +328,8 @@
         <div class="when">Weeks 3–8 · ML 201</div>
         <h3>Stanford CS229 — Machine Learning</h3>
         <p>Ng's 2018 lectures 1–13: supervised learning, generalization, kernels, the bridge to deep learning. Problem sets in recitation. Skim what Karpathy already made concrete.</p>
+        Skim what Karpathy already made concrete.</p>
+        <div class="engline"><b>ENG 30:</b> Environments — <a href="https://realpython.com/python-virtual-environments-a-primer/">Real Python’s venv primer</a>, then a fresh env per project as habit. From week 6: <a href="https://docs.docker.com/get-started/">Docker’s official Get Started</a>, parts 1–3.</div>
       </div>
     </div>
 
@@ -346,6 +358,8 @@
       <div class="body">
         <div class="when">Weeks 9–13 · DL 201</div>
         <h3>MIT 6.S191 — Intro to Deep Learning, 2027 edition</h3>
+        <h3>MIT 6.S191 — Intro to Deep Learning, 2027 edition</h3>
+        <div class="engline"><b>ENG 30:</b> Dockerize one tiny Python script end to end — Dockerfile written from scratch, image runs clean. Then containerize Project 1’s inference script.</div>
         <p>The fast modern survey. Fills what Karpathy skipped: CNNs, RNNs formally, generative models.</p>
       </div>
     </div>
@@ -371,7 +385,6 @@
       <div class="chev"></div>
     </summary>
 
-    <div class="engstrip"><div class="eicon">eng</div><div class="etxt"><b>ENG 30 this term — serving &amp; CI.</b> FastAPI around Projects 2–3, Linux/GPU-box literacy for Runpod, GitHub Actions running the CS336 test suites.</div></div>
 
     <div class="wk" data-id="t3w1" data-start="2027-03-15" data-end="2027-04-18">
       <div class="tick"><input type="checkbox" aria-label="Mark CS224N complete"></div>
@@ -379,6 +392,8 @@
         <div class="when">Weeks 1–5 · NLP 301</div>
         <h3>Stanford CS224N — NLP with Deep Learning</h3>
         <p>Word vectors → attention → Transformers → pretraining → post-training. Do at least one of the Transformer assignments.</p>
+        Do at least one of the Transformer assignments.</p>
+        <div class="engline"><b>ENG 30:</b> <a href="https://fastapi.tiangolo.com/tutorial/">FastAPI official tutorial</a>, First Steps → Request Body — 15 min reading, 15 min building daily.</div>
       </div>
     </div>
 
@@ -389,6 +404,7 @@
         <h3>Stanford CS336 — Language Modeling from Scratch</h3>
         <p>The course this whole year points at. All five assignments, done for real against the public unit tests: tokenizer + Transformer, systems &amp; kernels (budget three weeks — it's the hard one), scaling laws, data pipeline, alignment.</p>
         <p class="quiet">Rent GPU time for these, roughly $30–60 total. That's tuition. Pay it.</p>
+        <div class="engline"><b>ENG 30:</b> <a href="https://docs.github.com/en/actions/quickstart">GitHub Actions quickstart</a>, then wire CS336’s unit tests into CI on your repo — green checks on every push.</div>
       </div>
     </div>
 
@@ -431,7 +447,6 @@
       <div class="chev"></div>
     </summary>
 
-    <div class="engstrip"><div class="eicon">eng</div><div class="etxt"><b>ENG 30 this term — ML system design.</b> Chip Huyen, one chapter a week, plus mock design interviews with Claude. Data pipelines, training infra, serving, evals, drift.</div></div>
 
     <div class="wk" data-id="t4w1" data-start="2027-06-21" data-end="2027-07-11">
       <div class="tick"><input type="checkbox" aria-label="Mark Silver RL complete"></div>
@@ -439,6 +454,8 @@
         <div class="when">Weeks 1–3 · RL 401</div>
         <h3>David Silver's RL course</h3>
         <p>All ten lectures. The foundations everything RL-flavored stands on.</p>
+        The foundations everything RL-flavored stands on.</p>
+        <div class="engline"><b>ENG 30:</b> <a href="https://www.oreilly.com/library/view/designing-machine-learning-systems/9781098107956/">Chip Huyen, “Designing ML Systems”</a> — free via your O’Reilly access. Chapters 1–2.</div>
       </div>
     </div>
 
@@ -448,6 +465,8 @@
         <div class="when">Weeks 4–8 · RL 402</div>
         <h3>Berkeley CS285 — Deep RL</h3>
         <p>Levine. Policy gradients through offline RL — the course that makes RLHF papers readable.</p>
+        the course that makes RLHF papers readable.</p>
+        <div class="engline"><b>ENG 30:</b> DMLS chapters 3–7 — one a week: data engineering, training data, feature engineering, model development, evaluation.</div>
       </div>
     </div>
 
@@ -466,6 +485,8 @@
         <div class="when">Weeks 8–10 · Seminar tier</div>
         <h3>Berkeley CS294 LLM Agents · Stanford CS25</h3>
         <p class="quiet">Watch selectively — frontier guest talks, chosen by relevance.</p>
+        frontier guest talks, chosen by relevance.</p>
+        <div class="engline"><b>ENG 30:</b> DMLS chapters 8–11 + first mock ML-system-design interview with Claude (“design an eval pipeline for a shopping agent”).</div>
       </div>
     </div>
 
@@ -475,6 +496,8 @@
         <div class="when">Weeks 9–13 · Capstone</div>
         <h3>One project that combines everything</h3>
         <p>Fine-tune + quantize + serve end-to-end with a real eval harness · a domain agent with retrieval, tools, and a written eval report · or reproduce a small paper result.</p>
+        or reproduce a small paper result.</p>
+        <div class="engline"><b>ENG 30:</b> Weekly mock design interviews with Claude — one system per week, graded.</div>
         <div class="deliv">Deliverable: repo + writeup good enough for a frontier-lab interviewer</div>
       </div>
     </div>
@@ -573,9 +596,7 @@
     currentWk.classList.add('now');
     var label = currentWk.querySelector('.when').textContent;
     var title = currentWk.querySelector('h3').textContent;
-    var engNames = {term1:'Python drills', term2:'environments & Docker', term3:'serving & CI', term4:'ML system design'};
-    var eng = term && engNames[term.id] ? ' · ENG 30: ' + engNames[term.id] : '';
-    where.textContent = 'Now: ' + label + ' — ' + title + eng;
+    where.textContent = 'Now: ' + label + ' — ' + title;
   } else {
     where.textContent = 'Between scheduled weeks — continue where you left off.';
   }
