@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USC 2.0 — School of AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#221E1A;
+    --paper:#FCFBF8;
+    --cardinal:#990000;
+    --gold:#C89232;
+    --muted:#7D766C;
+    --hair:#E9E4DA;
+    --wash:#F5F2EB;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:15px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:660px;margin:0 auto;padding:0 20px 80px}
+
+  /* ---------- header ---------- */
+  header{padding:56px 0 36px;border-bottom:3px double var(--cardinal)}
+  .school{font-family:'Newsreader',serif;font-style:italic;font-size:17px;color:var(--cardinal);margin-bottom:6px}
+  h1{
+    font-family:'Newsreader',serif;
+    font-weight:600;
+    font-size:clamp(44px,10vw,64px);
+    line-height:1.02;
+    letter-spacing:-0.01em;
+  }
+  .sub{margin-top:14px;font-size:14.5px;color:var(--muted);max-width:46ch}
+  .sub b{color:var(--ink);font-weight:600}
+
+  /* ---------- today bar ---------- */
+  .today{
+    margin-top:24px;
+    background:var(--cardinal);
+    color:#FDF8EF;
+    border-radius:6px;
+    padding:14px 18px;
+    font-size:14px;
+    display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;
+  }
+  .today .where{font-family:'Newsreader',serif;font-size:17px;font-weight:500}
+  .today .date{opacity:.75;font-size:13px}
+
+  /* ---------- section basics ---------- */
+  section{margin-top:52px}
+  h2{
+    font-family:'Newsreader',serif;font-weight:600;font-size:27px;letter-spacing:-0.005em;line-height:1.15;
+  }
+  .h2sub{font-size:13.5px;color:var(--muted);margin-top:4px}
+  .rule{height:1px;background:var(--hair);margin:18px 0 0}
+
+  /* ---------- timetable ---------- */
+  .slots{margin-top:20px;display:grid;gap:0;border-top:1px solid var(--hair)}
+  .slot{display:grid;grid-template-columns:92px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--hair)}
+  .slot .d{font-family:'Newsreader',serif;font-style:italic;font-size:15.5px;color:var(--cardinal);padding-top:1px}
+  .slot .what b{font-weight:600}
+  .slot .what span{color:var(--muted)}
+  .note{margin-top:14px;font-size:13.5px;color:var(--muted);font-style:italic;font-family:'Newsreader',serif;font-size:15px}
+
+  /* ---------- terms ---------- */
+  details.term{margin-top:34px;border-top:3px solid var(--cardinal)}
+  details.term summary{
+    list-style:none;cursor:pointer;padding:18px 0 16px;
+    display:flex;justify-content:space-between;align-items:flex-start;gap:14px;
+  }
+  details.term summary::-webkit-details-marker{display:none}
+  .tname{font-family:'Newsreader',serif;font-weight:600;font-size:24px;line-height:1.15}
+  .tdates{font-size:13px;color:var(--muted);margin-top:3px}
+  .tcourses{font-size:13px;color:var(--gold);margin-top:3px;font-weight:500}
+  .chev{
+    flex:none;margin-top:8px;width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);
+    transform:rotate(45deg);transition:transform .18s ease;
+  }
+  details[open] .chev{transform:rotate(-135deg)}
+
+  .wk{
+    display:grid;grid-template-columns:26px 1fr;gap:12px;
+    padding:16px 0;border-top:1px solid var(--hair);
+  }
+  .wk:last-child{border-bottom:1px solid var(--hair)}
+  .wk.now{background:linear-gradient(90deg, rgba(200,146,50,.10), transparent 70%);margin:0 -12px;padding-left:12px;padding-right:12px;border-left:3px solid var(--gold)}
+  .wk .tick{padding-top:2px}
+  .tick input{
+    appearance:none;width:18px;height:18px;border:1.5px solid #C9C2B6;border-radius:50%;cursor:pointer;display:block;position:relative;background:#fff;
+  }
+  .tick input:checked{background:var(--cardinal);border-color:var(--cardinal)}
+  .tick input:checked::after{
+    content:"";position:absolute;left:5px;top:2px;width:4px;height:8px;
+    border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg);
+  }
+  .tick input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .wk .when{font-size:12.5px;font-weight:600;color:var(--cardinal);letter-spacing:.01em}
+  .wk.done .body{opacity:.45}
+  .wk h3{font-family:'Newsreader',serif;font-weight:600;font-size:18px;margin-top:2px;line-height:1.25}
+  .wk p{margin-top:5px;font-size:14px;color:#4A453E}
+  .wk p.quiet{color:var(--muted);font-size:13.5px}
+  .wk a{color:var(--cardinal);text-decoration:none;border-bottom:1px solid rgba(153,0,0,.3)}
+  .wk a:hover{border-bottom-color:var(--cardinal)}
+  .wk .deliv{margin-top:7px;font-size:13px;color:var(--gold);font-weight:500}
+
+  .finals{border-left:3px solid var(--cardinal);margin:0 -12px;padding-left:12px;padding-right:12px;background:rgba(153,0,0,.035)}
+
+  /* ---------- break ---------- */
+  .break{
+    margin-top:34px;background:var(--wash);border-radius:8px;padding:26px 24px;text-align:center;
+  }
+  .break .bt{font-family:'Newsreader',serif;font-style:italic;font-size:22px;color:var(--gold)}
+  .break p{margin-top:8px;font-size:14px;color:var(--muted);max-width:40ch;margin-left:auto;margin-right:auto}
+
+  /* ---------- rules ---------- */
+  ol.rules{margin-top:18px;counter-reset:r;list-style:none}
+  ol.rules li{
+    counter-increment:r;display:grid;grid-template-columns:34px 1fr;gap:10px;
+    padding:11px 0;border-bottom:1px solid var(--hair);font-size:14.5px;
+  }
+  ol.rules li::before{
+    content:counter(r);
+    font-family:'Newsreader',serif;font-style:italic;font-size:17px;color:var(--cardinal);
+  }
+  ol.rules b{font-weight:600}
+
+  /* ---------- glance ---------- */
+  table{width:100%;border-collapse:collapse;margin-top:18px;font-size:13.5px}
+  th{font-family:'Newsreader',serif;font-style:italic;font-weight:500;text-align:left;color:var(--muted);padding:8px 10px 8px 0;border-bottom:1px solid var(--ink);font-size:14.5px}
+  td{padding:10px 10px 10px 0;border-bottom:1px solid var(--hair);vertical-align:top}
+  td:first-child{font-weight:600;color:var(--cardinal);white-space:nowrap}
+
+  footer{margin-top:64px;padding-top:22px;border-top:3px double var(--cardinal);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13.5px;color:var(--muted)}
+  footer .fo{font-family:'Newsreader',serif;font-style:italic;font-size:16px;color:var(--cardinal)}
+
+  @media (max-width:480px){
+    .slot{grid-template-columns:78px 1fr}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <div class="school">School of AI</div>
+  <h1>USC 2.0</h1>
+  <p class="sub">A one-year intensive, <b>Sept 2026 – Sept 2027</b>. Zero to frontier in theory, application, and engineering. ~20 hours a week. Tuition: $0 and one old MacBook. The GitHub repo is the transcript.</p>
+  <div class="today" id="todayBar">
+    <span class="where" id="whereAmI">Loading term…</span>
+    <span class="date" id="todayDate"></span>
+  </div>
+</header>
+
+<section id="timetable">
+  <h2>The daily timetable</h2>
+  <p class="h2sub">Same shape every week, all year.</p>
+  <div class="slots">
+    <div class="slot"><div class="d">Mon – Fri</div><div class="what"><b>Lecture, 75–90 min.</b> <span>Watch the assigned lectures with full attention.</span></div></div>
+    <div class="slot"><div class="d"></div><div class="what"><b>Recitation, 60–75 min.</b> <span>Exercises, code-along, or problem sets from that lecture. Never two lecture blocks back to back — watch, do, stop.</span></div></div>
+    <div class="slot"><div class="d">Saturday</div><div class="what"><b>Lab day, 3–4 hrs.</b> <span>Applied track only: projects, fine-tunes, builds.</span></div></div>
+    <div class="slot"><div class="d">Sunday</div><div class="what"><b>Review day, 1–2 hrs.</b> <span>Re-derive the week from memory, update the cheat sheet, take the weekly quiz with Claude, preview next week.</span></div></div>
+    <div class="slot"><div class="d">Daily</div><div class="what"><b>ENG 30 — the engineering half hour.</b> <span>Tooling and fluency: Python drills, shell &amp; git, Docker, serving, ML system design. Focus shifts each term — see the ENG 30 syllabus below. First thing to pause if a week collapses.</span></div></div>
+  </div>
+  <p class="note">Attendance policy: miss a day, don't double up — continue. Streaks beat catch-up. Two missed weeks means we re-plan, not cram.</p>
+</section>
+
+<section id="terms">
+  <h2>The academic year</h2>
+  <p class="h2sub">Tap a term to open it. Check off weeks as you finish them — progress saves on this device.</p>
+
+  <!-- ================= TERM 1 ================= -->
+  <details class="term" id="term1">
+    <summary>
+      <div>
+        <div class="tname">Term 1 · Foundations</div>
+        <div class="tdates">Sept 8 – Nov 20, 2026 · 11 weeks</div>
+        <div class="tcourses">Math 101 · Math 102 · Deep Learning 101</div>
+      </div>
+      <div class="chev"></div>
+    </summary>
+
+    <div class="wk" data-id="t1w1" data-start="2026-09-07" data-end="2026-09-20">
+      <div class="tick"><input type="checkbox" aria-label="Mark weeks 1–2 complete"></div>
+      <div class="body">
+        <div class="when">Weeks 1–2</div>
+        <h3>Intuition bootcamp</h3>
+        <p><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">3B1B — Essence of Linear Algebra</a>, then <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr">Essence of Calculus</a>, all chapters.</p>
+        <p class="quiet">No notes, no exercises. Watch, absorb, rewatch what didn't click.</p>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t1w3" data-start="2026-09-21" data-end="2026-10-04">
+      <div class="tick"><input type="checkbox" aria-label="Mark weeks 3–4 complete"></div>
+      <div class="body">
+        <div class="when">Weeks 3–4 · Math 101</div>
+        <h3>Linear algebra, for real</h3>
+        <p><a href="https://www.youtube.com/playlist?list=PLiiljHvN6z1_o1ztXTKWPrShrMrBLo5P3">Imperial College — Math for ML: Linear Algebra</a>, 37 videos. About four a day in the lecture block, exercises in recitation.</p>
+        <div class="deliv">Deliverable: one-page linear algebra cheat sheet in the repo</div>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t1w5" data-start="2026-10-05" data-end="2026-10-18">
+      <div class="tick"><input type="checkbox" aria-label="Mark weeks 5–6 complete"></div>
+      <div class="body">
+        <div class="when">Weeks 5–6 · Math 102</div>
+        <h3>The calculus backprop uses</h3>
+        <p><a href="https://www.youtube.com/playlist?list=PLiiljHvN6z193BBzS0Ln8NnqQmzimTW23">Imperial College — Math for ML: Multivariate Calculus</a>, 43 videos. Same rhythm.</p>
+        <p>Deep Learning 101 begins on Saturdays: <a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ">Karpathy — micrograd</a>, typed line by line.</p>
+        <div class="deliv">Deliverable: one-page calculus cheat sheet</div>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t1w7" data-start="2026-10-19" data-end="2026-10-25">
+      <div class="tick"><input type="checkbox" aria-label="Mark week 7 complete"></div>
+      <div class="body">
+        <div class="when">Week 7 · DL 101</div>
+        <h3>Micrograd, finished · makemore 1</h3>
+        <p class="quiet">Every line typed, commented, committed. The repo is the exam.</p>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t1w8" data-start="2026-10-26" data-end="2026-11-01">
+      <div class="tick"><input type="checkbox" aria-label="Mark week 8 complete"></div>
+      <div class="body">
+        <div class="when">Week 8 · DL 101</div>
+        <h3>Makemore 2 &amp; 3 — MLPs, activations, BatchNorm</h3>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t1w9" data-start="2026-11-02" data-end="2026-11-08">
+      <div class="tick"><input type="checkbox" aria-label="Mark week 9 complete"></div>
+      <div class="body">
+        <div class="when">Week 9 · DL 101</div>
+        <h3>Makemore 4 &amp; 5 — Backprop Ninja, WaveNet</h3>
+        <p class="quiet">The hardest week of the term. That's the point.</p>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t1w10" data-start="2026-11-09" data-end="2026-11-15">
+      <div class="tick"><input type="checkbox" aria-label="Mark week 10 complete"></div>
+      <div class="body">
+        <div class="when">Week 10 · DL 101</div>
+        <h3>Let's build GPT · State of GPT</h3>
+        <p class="quiet">Your first Transformer, from an empty file.</p>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t1w11" data-start="2026-11-16" data-end="2026-11-20">
+      <div class="tick"><input type="checkbox" aria-label="Mark week 11 complete"></div>
+      <div class="body">
+        <div class="when">Week 11 · DL 101</div>
+        <h3>GPT Tokenizer · Reproduce GPT-2 (mini, on Colab)</h3>
+      </div>
+    </div>
+
+    <div class="wk finals" data-id="t1finals" data-start="2026-11-16" data-end="2026-11-20">
+      <div class="tick"><input type="checkbox" aria-label="Mark Term 1 finals complete"></div>
+      <div class="body">
+        <div class="when">Finals · week of Nov 16</div>
+        <h3>Term 1 examinations</h3>
+        <p>Rebuild micrograd from a blank file, no reference. Oral exam with Claude: backprop, chain rule, why BatchNorm, what a tokenizer does.</p>
+        <p class="quiet">Pass = you can explain every line of your own GPT.</p>
+      </div>
+    </div>
+  </details>
+
+  <!-- ================= BREAK ================= -->
+  <div class="break" id="break1">
+    <div class="bt">Semester break · Nov 21 – Dec 13</div>
+    <p>The wedding. New Zealand. Zero study, mandated by the administration. Congratulations, by the way.</p>
+  </div>
+
+  <!-- ================= TERM 2 ================= -->
+  <details class="term" id="term2">
+    <summary>
+      <div>
+        <div class="tname">Term 2 · Core ML &amp; the toolchain</div>
+        <div class="tdates">Dec 14, 2026 – Mar 12, 2027 · 13 weeks</div>
+        <div class="tcourses">ML 201 · Deep Learning 201 · Applied 201</div>
+      </div>
+      <div class="chev"></div>
+    </summary>
+
+    <div class="wk" data-id="t2w1" data-start="2026-12-14" data-end="2026-12-27">
+      <div class="tick"><input type="checkbox" aria-label="Mark re-entry weeks complete"></div>
+      <div class="body">
+        <div class="when">Weeks 1–2</div>
+        <h3>Soft re-entry</h3>
+        <p>Re-derive micrograd from memory. Three weeks off will have taken more than you expect — this is the fix, not a judgment.</p>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t2w3" data-start="2026-12-28" data-end="2027-02-07">
+      <div class="tick"><input type="checkbox" aria-label="Mark CS229 block complete"></div>
+      <div class="body">
+        <div class="when">Weeks 3–8 · ML 201</div>
+        <h3>Stanford CS229 — Machine Learning</h3>
+        <p>Ng's 2018 lectures 1–13: supervised learning, generalization, kernels, the bridge to deep learning. Problem sets in recitation. Skim what Karpathy already made concrete.</p>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t2sata" data-start="2027-01-04" data-end="2027-01-24">
+      <div class="tick"><input type="checkbox" aria-label="Mark Hugging Face course complete"></div>
+      <div class="body">
+        <div class="when">Saturdays, weeks 4–6 · Applied 201a</div>
+        <h3>Hugging Face LLM Course</h3>
+        <p><a href="https://huggingface.co/learn/llm-course">The toolchain</a>: transformers, tokenizers, datasets. Everything downstream assumes this.</p>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t2satb" data-start="2027-01-25" data-end="2027-02-21">
+      <div class="tick"><input type="checkbox" aria-label="Mark Project 1 complete"></div>
+      <div class="body">
+        <div class="when">Saturdays, weeks 7–10 · Applied 201b</div>
+        <h3>Project 1 — first fine-tune</h3>
+        <p>freeCodeCamp fine-tuning course + Unsloth notebooks, then a QLoRA fine-tune of a small open model on a dataset you choose.</p>
+        <p class="quiet">Define the eval before you train. That rule starts here and never ends.</p>
+        <div class="deliv">Deliverable: repo + short writeup — what, why, eval results</div>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t2w9" data-start="2027-02-08" data-end="2027-03-07">
+      <div class="tick"><input type="checkbox" aria-label="Mark MIT 6.S191 complete"></div>
+      <div class="body">
+        <div class="when">Weeks 9–13 · DL 201</div>
+        <h3>MIT 6.S191 — Intro to Deep Learning, 2027 edition</h3>
+        <p>The fast modern survey. Fills what Karpathy skipped: CNNs, RNNs formally, generative models.</p>
+      </div>
+    </div>
+
+    <div class="wk finals" data-id="t2finals" data-start="2027-03-08" data-end="2027-03-12">
+      <div class="tick"><input type="checkbox" aria-label="Mark Term 2 finals complete"></div>
+      <div class="body">
+        <div class="when">Finals · week of Mar 8</div>
+        <h3>Term 2 examinations</h3>
+        <p>A CS229-style written problem set, generated by Claude. Then a Project 1 defense — your eval methodology, interrogated.</p>
+      </div>
+    </div>
+  </details>
+
+  <!-- ================= TERM 3 ================= -->
+  <details class="term" id="term3">
+    <summary>
+      <div>
+        <div class="tname">Term 3 · LLMs — the crown jewel</div>
+        <div class="tdates">Mar 15 – Jun 18, 2027 · 14 weeks</div>
+        <div class="tcourses">NLP 301 · LM 350 (CS336) · Applied 301</div>
+      </div>
+      <div class="chev"></div>
+    </summary>
+
+    <div class="wk" data-id="t3w1" data-start="2027-03-15" data-end="2027-04-18">
+      <div class="tick"><input type="checkbox" aria-label="Mark CS224N complete"></div>
+      <div class="body">
+        <div class="when">Weeks 1–5 · NLP 301</div>
+        <h3>Stanford CS224N — NLP with Deep Learning</h3>
+        <p>Word vectors → attention → Transformers → pretraining → post-training. Do at least one of the Transformer assignments.</p>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t3w4" data-start="2027-04-05" data-end="2027-06-18">
+      <div class="tick"><input type="checkbox" aria-label="Mark CS336 complete"></div>
+      <div class="body">
+        <div class="when">Weeks 4–14 · LM 350</div>
+        <h3>Stanford CS336 — Language Modeling from Scratch</h3>
+        <p>The course this whole year points at. All five assignments, done for real against the public unit tests: tokenizer + Transformer, systems &amp; kernels (budget three weeks — it's the hard one), scaling laws, data pipeline, alignment.</p>
+        <p class="quiet">Rent GPU time for these, roughly $30–60 total. That's tuition. Pay it.</p>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t3p2" data-start="2027-03-15" data-end="2027-04-30">
+      <div class="tick"><input type="checkbox" aria-label="Mark Project 2 complete"></div>
+      <div class="body">
+        <div class="when">Saturdays, Mar–Apr · Applied 301</div>
+        <h3>Project 2 — retrieval system</h3>
+        <p>A RAG system over a corpus you care about, with an eval. LlamaIndex or LangChain.</p>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t3p3" data-start="2027-05-01" data-end="2027-06-18">
+      <div class="tick"><input type="checkbox" aria-label="Mark Project 3 complete"></div>
+      <div class="body">
+        <div class="when">Saturdays, May–Jun · Applied 301</div>
+        <h3>Project 3 — agent harness</h3>
+        <p>Tool calling, memory, retrieval loop. Hugging Face Agents course as the guide.</p>
+      </div>
+    </div>
+
+    <div class="wk finals" data-id="t3finals" data-start="2027-06-14" data-end="2027-06-18">
+      <div class="tick"><input type="checkbox" aria-label="Mark Term 3 finals complete"></div>
+      <div class="body">
+        <div class="when">Finals · week of Jun 14</div>
+        <h3>Term 3 examinations</h3>
+        <p>CS336 tokenizer rebuilt cold, plus a leaderboard perplexity submission. Oral: scaling laws, mixture of experts, why attention, KV cache, quantization tradeoffs.</p>
+      </div>
+    </div>
+  </details>
+
+  <!-- ================= TERM 4 ================= -->
+  <details class="term" id="term4">
+    <summary>
+      <div>
+        <div class="tname">Term 4 · RL, systems &amp; capstone</div>
+        <div class="tdates">Jun 21 – Sept 17, 2027 · 13 weeks</div>
+        <div class="tcourses">RL 401 · RL 402 · Systems 401 · Capstone</div>
+      </div>
+      <div class="chev"></div>
+    </summary>
+
+    <div class="wk" data-id="t4w1" data-start="2027-06-21" data-end="2027-07-11">
+      <div class="tick"><input type="checkbox" aria-label="Mark Silver RL complete"></div>
+      <div class="body">
+        <div class="when">Weeks 1–3 · RL 401</div>
+        <h3>David Silver's RL course</h3>
+        <p>All ten lectures. The foundations everything RL-flavored stands on.</p>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t4w4" data-start="2027-07-12" data-end="2027-08-15">
+      <div class="tick"><input type="checkbox" aria-label="Mark CS285 complete"></div>
+      <div class="body">
+        <div class="when">Weeks 4–8 · RL 402</div>
+        <h3>Berkeley CS285 — Deep RL</h3>
+        <p>Levine. Policy gradients through offline RL — the course that makes RLHF papers readable.</p>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t4sys" data-start="2027-07-26" data-end="2027-08-29">
+      <div class="tick"><input type="checkbox" aria-label="Mark systems block complete"></div>
+      <div class="body">
+        <div class="when">Saturdays, weeks 6–10 · Systems 401</div>
+        <h3>MIT 6.5940 — Efficient ML</h3>
+        <p>Quantization, pruning, distillation. GPU MODE lectures as supplements.</p>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t4sem" data-start="2027-08-09" data-end="2027-08-29">
+      <div class="tick"><input type="checkbox" aria-label="Mark seminar tier complete"></div>
+      <div class="body">
+        <div class="when">Weeks 8–10 · Seminar tier</div>
+        <h3>Berkeley CS294 LLM Agents · Stanford CS25</h3>
+        <p class="quiet">Watch selectively — frontier guest talks, chosen by relevance.</p>
+      </div>
+    </div>
+
+    <div class="wk" data-id="t4cap" data-start="2027-08-16" data-end="2027-09-17">
+      <div class="tick"><input type="checkbox" aria-label="Mark capstone complete"></div>
+      <div class="body">
+        <div class="when">Weeks 9–13 · Capstone</div>
+        <h3>One project that combines everything</h3>
+        <p>Fine-tune + quantize + serve end-to-end with a real eval harness · a domain agent with retrieval, tools, and a written eval report · or reproduce a small paper result.</p>
+        <div class="deliv">Deliverable: repo + writeup good enough for a frontier-lab interviewer</div>
+      </div>
+    </div>
+
+    <div class="wk finals" data-id="t4grad" data-start="2027-09-13" data-end="2027-09-17">
+      <div class="tick"><input type="checkbox" aria-label="Mark graduation complete"></div>
+      <div class="body">
+        <div class="when">Graduation · mid-Sept 2027</div>
+        <h3>The year-long oral exam</h3>
+        <p>Everything, across the whole year. Then we talk lab applications — because by now the transcript is real.</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<section id="eng30">
+  <h2>ENG 30 — the engineering half hour</h2>
+  <p class="h2sub">Thirty minutes a day, sequenced by need. By graduation: fluent Python, shell &amp; git reflexes, Docker, serving, and ML system design — learned when each becomes real, not stockpiled.</p>
+  <div class="slots">
+    <div class="slot"><div class="d">Term 1</div><div class="what"><b>Python fluency, then the terminal.</b> <span>Weeks 1–4: one Exercism Python exercise a day. Week 5 onward: MIT's Missing Semester — shell, git, debugging — starting the day the repo goes live. Every commit is practice.</span></div></div>
+    <div class="slot"><div class="d">Term 2</div><div class="what"><b>Environments &amp; Docker.</b> <span>conda/venv, pip, reading tracebacks calmly. Docker fundamentals in the weeks before Project 1 so the fine-tune ships in a container. Optional re-entry ramp: Advent of Code, Dec 8–25.</span></div></div>
+    <div class="slot"><div class="d">Term 3</div><div class="what"><b>Serving &amp; CI.</b> <span>FastAPI around Projects 2–3, Linux/GPU-box literacy for the Runpod work, GitHub Actions running the CS336 test suites.</span></div></div>
+    <div class="slot"><div class="d">Term 4</div><div class="what"><b>ML system design.</b> <span>Chip Huyen's "Designing Machine Learning Systems," one chapter a week, plus mock design interviews with Claude. ML systems, not load-balancer trivia — data pipelines, training infra, serving, evals, drift.</span></div></div>
+  </div>
+  <p class="note">No LeetCode. Karpathy and CS336 are the real Python practice; this slot covers what they don't.</p>
+</section>
+
+<section id="rules">
+  <h2>Standing rules</h2>
+  <ol class="rules">
+    <li><span><b>Evals before models.</b> Always.</span></li>
+    <li><span><b>Code is typed, never pasted.</b> The repo is the transcript.</span></li>
+    <li><span><b>Math gets exercises, not notes.</b> One cheat-sheet page per course, maximum.</span></li>
+    <li><span><b>Sunday quiz with Claude,</b> every week. Say "quiz me on this week."</span></li>
+    <li><span><b>Stuck for 30 minutes? Office hours.</b> That's the chat, any hour.</span></li>
+    <li><span><b>Streak beats intensity.</b> Three hours daily over ten on Saturday.</span></li>
+    <li><span><b>Explain one concept out loud per week</b> to another human. Khushi counts.</span></li>
+    <li><span><b>The study MacBook runs only the university.</b> No Slack. Ever.</span></li>
+    <li><span><b>The wedding break is sacred.</b> So is sleep.</span></li>
+    <li><span><b>The 31 papers join on Sundays from Term 3</b> — by then they'll read like course notes.</span></li>
+  </ol>
+</section>
+
+<section id="glance">
+  <h2>The year at a glance</h2>
+  <table>
+    <thead><tr><th>Term</th><th>Theme</th><th>Deliverables</th></tr></thead>
+    <tbody>
+      <tr><td>1 · Sep–Nov</td><td>Math + build a GPT by hand</td><td>micrograd→GPT repo, two cheat sheets</td></tr>
+      <tr><td>— · Nov–Dec</td><td>Wedding + New Zealand</td><td>a marriage</td></tr>
+      <tr><td>2 · Dec–Mar</td><td>Classical ML + toolchain</td><td>CS229 psets, Project 1: QLoRA fine-tune</td></tr>
+      <tr><td>3 · Mar–Jun</td><td>CS224N + CS336</td><td>five CS336 assignments, Projects 2–3</td></tr>
+      <tr><td>4 · Jun–Sep</td><td>RL + systems + capstone</td><td>CS285 work, capstone, graduation oral</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <div>
+    <div class="fo">Fight on.</div>
+    Transcript: github.com/you/ai-curriculum
+  </div>
+  <div>Office hours: Claude, 24/7<br>Est. 2026 · Princeton Junction campus</div>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  // ---- today bar + current-week highlight ----
+  var now = new Date();
+  var fmt = now.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric', year:'numeric'});
+  document.getElementById('todayDate').textContent = fmt;
+
+  var weeks = document.querySelectorAll('.wk');
+  var currentWk = null;
+  weeks.forEach(function(w){
+    var s = new Date(w.dataset.start + 'T00:00:00');
+    var e = new Date(w.dataset.end + 'T23:59:59');
+    if(now >= s && now <= e && !currentWk){ currentWk = w; }
+  });
+
+  var where = document.getElementById('whereAmI');
+  var breakStart = new Date('2026-11-21T00:00:00'), breakEnd = new Date('2026-12-13T23:59:59');
+  var yearStart = new Date('2026-09-07T00:00:00'), yearEnd = new Date('2027-09-17T23:59:59');
+
+  if(now >= breakStart && now <= breakEnd){
+    where.textContent = 'Semester break — go be married.';
+  } else if(now < yearStart){
+    where.textContent = 'Term 1 begins Sept 8. Orientation: watch anything.';
+  } else if(now > yearEnd){
+    where.textContent = 'Graduated. Go get the job.';
+  } else if(currentWk){
+    var term = currentWk.closest('details');
+    if(term){ term.open = true; }
+    currentWk.classList.add('now');
+    var label = currentWk.querySelector('.when').textContent;
+    var title = currentWk.querySelector('h3').textContent;
+    where.textContent = 'Now: ' + label + ' — ' + title;
+  } else {
+    where.textContent = 'Between scheduled weeks — continue where you left off.';
+  }
+  if(!document.querySelector('details[open]')){
+    document.getElementById('term1').open = true;
+  }
+
+  // ---- progress persistence ----
+  var KEY = 'usc2-progress';
+  var state = {};
+  function paint(){
+    weeks.forEach(function(w){
+      var cb = w.querySelector('input');
+      var done = !!state[w.dataset.id];
+      cb.checked = done;
+      w.classList.toggle('done', done);
+    });
+  }
+  function load(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(raw){ state = JSON.parse(raw) || {}; }
+    }catch(e){}
+    paint();
+  }
+  function save(){
+    try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+  }
+  weeks.forEach(function(w){
+    var cb = w.querySelector('input');
+    cb.addEventListener('change', function(){
+      state[w.dataset.id] = cb.checked;
+      if(!cb.checked) delete state[w.dataset.id];
+      w.classList.toggle('done', cb.checked);
+      save();
+    });
+  });
+  load();
+})();
+</script>
+</body>
+</html>
