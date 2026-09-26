@@ -82,12 +82,11 @@
   .tname{font-family:'Newsreader',serif;font-weight:600;font-size:24px;line-height:1.15}
   .tdates{font-size:13px;color:var(--muted);margin-top:3px}
   .tcourses{font-size:13px;color:var(--gold);margin-top:3px;font-weight:500}
-  .engline{
-    margin-top:9px;padding:8px 10px;border-radius:5px;font-size:13px;color:#5A5348;
-    background:rgba(200,146,50,.09);border-left:2.5px solid var(--gold);
-  }
-  .engline b{color:#8A6410;font-weight:600}
-  .engline a{color:#8A6410;text-decoration:none;border-bottom:1px solid rgba(200,146,50,.5)}
+  .res{margin-top:5px;font-size:13.5px;color:#4A453E;line-height:1.6}
+  .res .ship{color:#8A6410}
+  .eng{margin-top:6px;font-size:13px;color:var(--muted);line-height:1.55}
+  .etag{font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A6410;background:rgba(200,146,50,.13);border-radius:3px;padding:2px 6px;margin-right:8px;vertical-align:1px}
+  .wknote{margin-top:6px;font-size:12.5px;color:var(--muted);font-style:italic}
   .chev{
     flex:none;margin-top:8px;width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);
     transform:rotate(45deg);transition:transform .18s ease;
@@ -95,8 +94,17 @@
   details[open] .chev{transform:rotate(-135deg)}
 
   .wk{
-    display:grid;grid-template-columns:26px 1fr;gap:12px;
-    padding:16px 0;border-top:1px solid var(--hair);
+    display:grid;grid-template-columns:96px 1fr 24px;gap:16px;
+    grid-template-areas:"when body tick";
+    padding:19px 0;border-top:1px solid var(--hair);
+  }
+  .wk .when{grid-area:when;font-size:11.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);line-height:1.6;padding-top:4px}
+  .wk.finals .when{color:var(--cardinal)}
+  .wk .body{grid-area:body}
+  .wk .tick{grid-area:tick;justify-self:end}
+  @media (max-width:520px){
+    .wk{grid-template-columns:1fr 24px;grid-template-areas:"when tick" "body body";gap:6px 12px}
+    .wk .when{padding-top:0}
   }
   .wk:last-child{border-bottom:1px solid var(--hair)}
   .wk.now{background:linear-gradient(90deg, rgba(200,146,50,.10), transparent 70%);margin:0 -12px;padding-left:12px;padding-right:12px;border-left:3px solid var(--gold)}
@@ -110,13 +118,12 @@
     border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg);
   }
   .tick input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-  .wk .when{font-size:12.5px;font-weight:600;color:var(--cardinal);letter-spacing:.01em}
   .wk.done .body{opacity:.45}
-  .wk h3{font-family:'Newsreader',serif;font-weight:600;font-size:18px;margin-top:2px;line-height:1.25}
+  .wk h3{font-family:'Newsreader',serif;font-weight:600;font-size:17.5px;margin-top:0;line-height:1.3}
   .wk p{margin-top:5px;font-size:14px;color:#4A453E}
   .wk p.quiet{color:var(--muted);font-size:13.5px}
-  .wk a{color:var(--cardinal);text-decoration:none;border-bottom:1px solid rgba(153,0,0,.3)}
-  .wk a:hover{border-bottom-color:var(--cardinal)}
+  .wk a{color:var(--cardinal);text-decoration:none}
+  .wk a:hover{border-bottom:1px solid var(--cardinal)}
   .wk .deliv{margin-top:7px;font-size:13px;color:var(--gold);font-weight:500}
 
   .finals{border-left:3px solid var(--cardinal);margin:0 -12px;padding-left:12px;padding-right:12px;background:rgba(153,0,0,.035)}
@@ -182,9 +189,8 @@
 
 <section id="terms">
   <h2>The academic year</h2>
-  <p class="h2sub">Tap a term to open it. Check off weeks as you finish them — progress saves on this device.</p>
+  <p class="h2sub">Tap a term to open it; tick weeks as they fall.</p>
 
-  <!-- ================= TERM 1 ================= -->
   <details class="term" id="term1">
     <summary>
       <div>
@@ -196,65 +202,56 @@
     </summary>
 
     <div class="wk" data-id="f1" data-start="2026-10-01" data-end="2026-10-11">
-      <div class="tick"><input type="checkbox" aria-label="Mark intuition bootcamp complete"></div>
+      <div class="when">Oct 1–11</div>
       <div class="body">
-        <div class="when">Oct 1–11 · Intuition bootcamp</div>
         <h3>See the math before doing it</h3>
-        <p><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">3B1B — Essence of Linear Algebra</a>, then <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr">Essence of Calculus</a>. No notes — watch, absorb, rewatch what didn't click.</p>
-        <p class="quiet">Oct 1 is orientation: Chapters 1–2 only. Travel weekend Oct 2–4 is guilt-free. Full cadence begins Monday Oct 5.</p>
-        <div class="engline"><b>ENG 30:</b> From Oct 5 — join <a href="https://exercism.org/tracks/python">Exercism's Python track</a>, one exercise a day.</div>
+        <p class="res"><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank" rel="noopener">3B1B: Essence of Linear Algebra</a>, then <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank" rel="noopener">Essence of Calculus</a> — watch, no notes.</p>
+        <p class="eng"><span class="etag">ENG 30</span>from Oct 5: <a href="https://exercism.org/tracks/python" target="_blank" rel="noopener">Exercism Python</a>, one a day</p>
+        <p class="wknote">Oct 1 is orientation — chapters 1–2 only. Full cadence from Monday Oct 5.</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Oct 1–11 complete"></div>
     </div>
-
     <div class="wk" data-id="f2" data-start="2026-10-12" data-end="2026-10-25">
-      <div class="tick"><input type="checkbox" aria-label="Mark linear algebra weeks complete"></div>
+      <div class="when">Oct 12–25</div>
       <div class="body">
-        <div class="when">Oct 12–25 · Math 101</div>
         <h3>Linear algebra, for real</h3>
-        <p><a href="https://www.youtube.com/playlist?list=PLiiljHvN6z1_o1ztXTKWPrShrMrBLo5P3">Imperial College — Math for ML: Linear Algebra</a>, 37 videos. ~4 a day in the lecture block, exercises in recitation.</p>
-        <div class="deliv">Deliverable: one-page linear algebra cheat sheet in the repo</div>
-        <div class="engline"><b>ENG 30:</b> Exercism continues — strings, lists, dicts, loops. Each solution committed to <code>eng30/</code>.</div>
+        <p class="res"><a href="https://www.youtube.com/playlist?list=PLiiljHvN6z1_o1ztXTKWPrShrMrBLo5P3" target="_blank" rel="noopener">Imperial: Math for ML — Linear Algebra</a>, 37 videos + exercises. <span class="ship">→ ships a one-page cheat sheet</span></p>
+        <p class="eng"><span class="etag">ENG 30</span>Exercism continues — strings, lists, dicts; every solution committed</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Oct 12–25 complete"></div>
     </div>
-
     <div class="wk" data-id="f3" data-start="2026-10-26" data-end="2026-11-08">
-      <div class="tick"><input type="checkbox" aria-label="Mark calculus weeks complete"></div>
+      <div class="when">Oct 26 – Nov 8</div>
       <div class="body">
-        <div class="when">Oct 26 – Nov 8 · Math 102</div>
         <h3>The calculus backprop uses</h3>
-        <p><a href="https://www.youtube.com/playlist?list=PLiiljHvN6z193BBzS0Ln8NnqQmzimTW23">Imperial College — Math for ML: Multivariate Calculus</a>, 43 videos. Same rhythm.</p>
-        <div class="deliv">Deliverable: one-page calculus cheat sheet</div>
-        <div class="engline"><b>ENG 30:</b> <a href="https://missing.csail.mit.edu/">MIT Missing Semester</a> — “The Shell,” “Shell Tools &amp; Scripting,” then “Version Control (Git).”</div>
+        <p class="res"><a href="https://www.youtube.com/playlist?list=PLiiljHvN6z193BBzS0Ln8NnqQmzimTW23" target="_blank" rel="noopener">Imperial: Multivariate Calculus</a>, 43 videos. <span class="ship">→ ships a one-page cheat sheet</span></p>
+        <p class="eng"><span class="etag">ENG 30</span><a href="https://missing.csail.mit.edu/" target="_blank" rel="noopener">Missing Semester</a>: Shell, Shell Tools, Git</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Oct 26 – Nov 8 complete"></div>
     </div>
-
     <div class="wk" data-id="f4" data-start="2026-11-09" data-end="2026-11-20">
-      <div class="tick"><input type="checkbox" aria-label="Mark micrograd weeks complete"></div>
+      <div class="when">Nov 9–20</div>
       <div class="body">
-        <div class="when">Nov 9–20 · DL 101 begins</div>
         <h3>Micrograd — backprop from an empty file</h3>
-        <p><a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ">Karpathy — Zero to Hero</a>, video 1. Every line typed, commented, committed. The math you just learned, running.</p>
-        <div class="engline"><b>ENG 30:</b> Missing Semester — “Command-line Environment.” Aliases and dotfiles committed to <code>eng30/</code>.</div>
+        <p class="res"><a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ" target="_blank" rel="noopener">Karpathy: Zero to Hero</a>, video 1. Typed, never pasted.</p>
+        <p class="eng"><span class="etag">ENG 30</span>Missing Semester: Command-line Environment</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Nov 9–20 complete"></div>
     </div>
-
     <div class="wk finals" data-id="f5" data-start="2026-11-16" data-end="2026-11-20">
-      <div class="tick"><input type="checkbox" aria-label="Mark Term 1 finals complete"></div>
+      <div class="when">Finals</div>
       <div class="body">
-        <div class="when">Finals · week of Nov 16</div>
         <h3>Term 1 orals</h3>
-        <p>With Claude: chain rule, eigenvectors, gradients and Jacobians — and a guided walk through your own micrograd, line by line.</p>
+        <p class="res">Chain rule, eigenvectors, Jacobians — and your micrograd, line by line, with Claude.</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Term 1 finals complete"></div>
     </div>
   </details>
-
-  <!-- ================= BREAK ================= -->
   <div class="break" id="break1">
     <div class="bt">Semester break · Nov 21 – Dec 13</div>
     <p>The wedding. New Zealand. Zero study, mandated by the administration. Congratulations, by the way.</p>
   </div>
 
-  <!-- ================= TERM 2 ================= -->
   <details class="term" id="term2">
     <summary>
       <div>
@@ -266,73 +263,65 @@
     </summary>
 
     <div class="wk" data-id="d1" data-start="2026-12-14" data-end="2026-12-27">
-      <div class="tick"><input type="checkbox" aria-label="Mark re-entry weeks complete"></div>
+      <div class="when">Dec 14–27</div>
       <div class="body">
-        <div class="when">Dec 14–27</div>
         <h3>Soft re-entry</h3>
-        <p>Re-derive micrograd from memory. Three weeks off will have taken more than you expect — this is the fix, not a judgment.</p>
-        <div class="engline"><b>ENG 30:</b> <a href="https://adventofcode.com/">Advent of Code</a>, one puzzle a day through Dec 25. Pure Python reps, festive edition.</div>
+        <p class="res">Re-derive micrograd from memory. The honeymoon took some — this is the fix.</p>
+        <p class="eng"><span class="etag">ENG 30</span><a href="https://adventofcode.com/" target="_blank" rel="noopener">Advent of Code</a>, one a day to Dec 25</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Dec 14–27 complete"></div>
     </div>
-
     <div class="wk" data-id="d2" data-start="2026-12-28" data-end="2027-01-10">
-      <div class="tick"><input type="checkbox" aria-label="Mark makemore 1-2 complete"></div>
+      <div class="when">Dec 28 – Jan 10</div>
       <div class="body">
-        <div class="when">Dec 28 – Jan 10 · DL 101</div>
         <h3>Makemore 1 &amp; 2 — bigrams, then an MLP</h3>
-        <div class="engline"><b>ENG 30:</b> Full-stack thread begins — <a href="https://javascript.info/">javascript.info</a> fundamentals, 30 min a day.</div>
+        <p class="eng"><span class="etag">ENG 30</span>full-stack begins: <a href="https://javascript.info/" target="_blank" rel="noopener">javascript.info</a></p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Dec 28 – Jan 10 complete"></div>
     </div>
-
     <div class="wk" data-id="d3" data-start="2027-01-11" data-end="2027-01-24">
-      <div class="tick"><input type="checkbox" aria-label="Mark makemore 3-4 complete"></div>
+      <div class="when">Jan 11–24</div>
       <div class="body">
-        <div class="when">Jan 11–24 · DL 101</div>
         <h3>Makemore 3 &amp; 4 — BatchNorm, then Backprop Ninja</h3>
-        <p class="quiet">Ninja week is the hardest fortnight of the year. That's the point.</p>
-        <div class="engline"><b>ENG 30:</b> Missing Semester “Debugging &amp; Profiling” in week one — you'll use pdb on your own bugs immediately. ENG pauses for Ninja week.</div>
+        <p class="res">The hardest fortnight of the year, by design.</p>
+        <p class="eng"><span class="etag">ENG 30</span>Missing Semester: Debugging &amp; Profiling — then pause for Ninja week</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Jan 11–24 complete"></div>
     </div>
-
     <div class="wk" data-id="d4" data-start="2027-01-25" data-end="2027-02-07">
-      <div class="tick"><input type="checkbox" aria-label="Mark WaveNet and GPT start complete"></div>
+      <div class="when">Jan 25 – Feb 7</div>
       <div class="body">
-        <div class="when">Jan 25 – Feb 7 · DL 101</div>
-        <h3>Makemore 5 (WaveNet) · Let's build GPT begins</h3>
-        <div class="engline"><b>ENG 30:</b> javascript.info — functions, objects, async/await.</div>
+        <h3>Makemore 5 · Let&rsquo;s build GPT begins</h3>
+        <p class="eng"><span class="etag">ENG 30</span>javascript.info: functions, objects, async</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Jan 25 – Feb 7 complete"></div>
     </div>
-
     <div class="wk" data-id="d5" data-start="2027-02-08" data-end="2027-02-21">
-      <div class="tick"><input type="checkbox" aria-label="Mark GPT and tokenizer complete"></div>
+      <div class="when">Feb 8–21</div>
       <div class="body">
-        <div class="when">Feb 8–21 · DL 101</div>
-        <h3>Let's build GPT (finish) · State of GPT · GPT Tokenizer</h3>
-        <p class="quiet">Your first Transformer, from an empty file.</p>
-        <div class="engline"><b>ENG 30:</b> JavaScript in the browser — DOM + fetch. Build one tiny page and commit it.</div>
+        <h3>Let&rsquo;s build GPT · State of GPT · Tokenizer</h3>
+        <p class="res">Your first Transformer, from an empty file.</p>
+        <p class="eng"><span class="etag">ENG 30</span>JS in the browser: DOM + fetch — ship one tiny page</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Feb 8–21 complete"></div>
     </div>
-
     <div class="wk" data-id="d6" data-start="2027-02-22" data-end="2027-02-28">
-      <div class="tick"><input type="checkbox" aria-label="Mark GPT-2 reproduction complete"></div>
+      <div class="when">Feb 22–28</div>
       <div class="body">
-        <div class="when">Feb 22–28 · DL 101</div>
         <h3>Reproduce GPT-2 — mini run on Colab</h3>
-        <div class="engline"><b>ENG 30:</b> Catch-up week for Exercism, JS, and Missing Semester leftovers.</div>
+        <p class="eng"><span class="etag">ENG 30</span>catch-up week</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Feb 22–28 complete"></div>
     </div>
-
     <div class="wk finals" data-id="d7" data-start="2027-02-22" data-end="2027-02-28">
-      <div class="tick"><input type="checkbox" aria-label="Mark Term 2 finals complete"></div>
+      <div class="when">Finals</div>
       <div class="body">
-        <div class="when">Finals · week of Feb 22</div>
         <h3>Term 2 examinations</h3>
-        <p>Rebuild micrograd cold, from a blank file. Oral with Claude: backprop, chain rule, why BatchNorm, what a tokenizer does. Pass = you can explain every line of your own GPT.</p>
+        <p class="res">Micrograd rebuilt cold. Oral: backprop, BatchNorm, tokenizers — every line of your GPT, explained.</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Term 2 finals complete"></div>
     </div>
   </details>
-
-  <!-- ================= TERM 3 ================= -->
   <details class="term" id="term3">
     <summary>
       <div>
@@ -344,56 +333,48 @@
     </summary>
 
     <div class="wk" data-id="c1" data-start="2027-03-01" data-end="2027-04-11">
-      <div class="tick"><input type="checkbox" aria-label="Mark CS229 block complete"></div>
+      <div class="when">Mar 1 – Apr 11</div>
       <div class="body">
-        <div class="when">Mar 1 – Apr 11 · ML 201</div>
         <h3>Stanford CS229 — Machine Learning</h3>
-        <p>Ng's 2018 lectures 1–13: supervised learning, generalization, kernels, the bridge to deep learning. Problem sets in recitation. Skim what Karpathy already made concrete.</p>
-        <div class="engline"><b>ENG 30:</b> <a href="https://realpython.com/python-virtual-environments-a-primer/">venv primer</a> → fresh env per project as habit. From week 4: <a href="https://docs.docker.com/get-started/">Docker's Get Started</a>, parts 1–3.</div>
+        <p class="res">Ng&rsquo;s 2018 lectures 1–13, with problem sets. Skim what Karpathy made concrete.</p>
+        <p class="eng"><span class="etag">ENG 30</span><a href="https://realpython.com/python-virtual-environments-a-primer/" target="_blank" rel="noopener">venv primer</a>, then <a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener">Docker Get Started</a> from week 4</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Mar 1 – Apr 11 complete"></div>
     </div>
-
     <div class="wk" data-id="c2" data-start="2027-03-06" data-end="2027-03-27">
-      <div class="tick"><input type="checkbox" aria-label="Mark Hugging Face course complete"></div>
+      <div class="when">Saturdays · Mar</div>
       <div class="body">
-        <div class="when">Saturdays, March · Applied 201a</div>
         <h3>Hugging Face LLM Course</h3>
-        <p><a href="https://huggingface.co/learn/llm-course">The toolchain</a>: transformers, tokenizers, datasets. Everything downstream assumes this.</p>
+        <p class="res"><a href="https://huggingface.co/learn/llm-course" target="_blank" rel="noopener">The toolchain</a>: transformers, tokenizers, datasets.</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Saturdays · Mar complete"></div>
     </div>
-
     <div class="wk" data-id="c3" data-start="2027-04-03" data-end="2027-05-08">
-      <div class="tick"><input type="checkbox" aria-label="Mark Project 1 complete"></div>
+      <div class="when">Saturdays · Apr–May</div>
       <div class="body">
-        <div class="when">Saturdays, Apr – early May · Applied 201b</div>
         <h3>Project 1 — first fine-tune</h3>
-        <p>freeCodeCamp fine-tuning course + Unsloth notebooks, then a QLoRA fine-tune of a small open model on a dataset you choose.</p>
-        <p class="quiet">Define the eval before you train. That rule starts here and never ends.</p>
-        <div class="deliv">Deliverable: repo + writeup — what, why, eval results</div>
+        <p class="res">QLoRA on a small open model, via Unsloth. Eval defined before training. <span class="ship">→ ships repo + writeup</span></p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Saturdays · Apr–May complete"></div>
     </div>
-
     <div class="wk" data-id="c4" data-start="2027-04-12" data-end="2027-05-16">
-      <div class="tick"><input type="checkbox" aria-label="Mark MIT 6.S191 complete"></div>
+      <div class="when">Apr 12 – May 16</div>
       <div class="body">
-        <div class="when">Apr 12 – May 16 · DL 201</div>
-        <h3>MIT 6.S191 — Intro to Deep Learning, 2027 edition</h3>
-        <p>The fast modern survey. Fills what Karpathy skipped: CNNs, RNNs formally, generative models.</p>
-        <div class="engline"><b>ENG 30:</b> React — <a href="https://react.dev/learn">the official react.dev tutorial</a>, 30 min a day. Plus: dockerize Project 1's inference script end to end.</div>
+        <h3>MIT 6.S191 — Deep Learning, 2027 edition</h3>
+        <p class="res">The fast modern survey: CNNs, RNNs, generative models.</p>
+        <p class="eng"><span class="etag">ENG 30</span><a href="https://react.dev/learn" target="_blank" rel="noopener">react.dev</a> daily · dockerize Project 1</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Apr 12 – May 16 complete"></div>
     </div>
-
     <div class="wk finals" data-id="c5" data-start="2027-05-17" data-end="2027-05-23">
-      <div class="tick"><input type="checkbox" aria-label="Mark Term 3 finals complete"></div>
+      <div class="when">Finals</div>
       <div class="body">
-        <div class="when">Finals · week of May 17</div>
         <h3>Term 3 examinations</h3>
-        <p>A CS229-style written problem set, generated by Claude. Then a Project 1 defense — your eval methodology, interrogated.</p>
+        <p class="res">A CS229-style problem set by Claude, then a Project 1 defense.</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Term 3 finals complete"></div>
     </div>
   </details>
-
-  <!-- ================= TERM 4 ================= -->
   <details class="term" id="term4">
     <summary>
       <div>
@@ -405,55 +386,48 @@
     </summary>
 
     <div class="wk" data-id="l1" data-start="2027-05-24" data-end="2027-06-27">
-      <div class="tick"><input type="checkbox" aria-label="Mark CS224N complete"></div>
+      <div class="when">May 24 – Jun 27</div>
       <div class="body">
-        <div class="when">May 24 – Jun 27 · NLP 301</div>
         <h3>Stanford CS224N — NLP with Deep Learning</h3>
-        <p>Word vectors → attention → Transformers → pretraining → post-training. Do at least one of the Transformer assignments.</p>
-        <div class="engline"><b>ENG 30:</b> <a href="https://fastapi.tiangolo.com/tutorial/">FastAPI official tutorial</a>, First Steps → Request Body — 15 min reading, 15 min building.</div>
+        <p class="res">Word vectors → attention → Transformers → pretraining. One Transformer assignment minimum.</p>
+        <p class="eng"><span class="etag">ENG 30</span><a href="https://fastapi.tiangolo.com/tutorial/" target="_blank" rel="noopener">FastAPI tutorial</a>, build as you read</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark May 24 – Jun 27 complete"></div>
     </div>
-
     <div class="wk" data-id="l2" data-start="2027-06-14" data-end="2027-08-29">
-      <div class="tick"><input type="checkbox" aria-label="Mark CS336 complete"></div>
+      <div class="when">Jun 14 – Aug 29</div>
       <div class="body">
-        <div class="when">Jun 14 – Aug 29 · LM 350</div>
         <h3>Stanford CS336 — Language Modeling from Scratch</h3>
-        <p>The course this whole program points at. All five assignments, for real, against the public unit tests: tokenizer + Transformer, systems &amp; kernels (budget three weeks), scaling laws, data pipeline, alignment.</p>
-        <p class="quiet">Rent GPU time — roughly $30–60 total. That's tuition. Pay it.</p>
-        <div class="engline"><b>ENG 30:</b> <a href="https://docs.github.com/en/actions/quickstart">GitHub Actions quickstart</a> → CS336's tests in CI, green checks on every push. Plus one timed 2-hour FDE build drill with Claude each month, graded like an interview.</div>
+        <p class="res">All five assignments against the public unit tests. GPU rental ≈ $30–60: that&rsquo;s tuition.</p>
+        <p class="eng"><span class="etag">ENG 30</span><a href="https://docs.github.com/en/actions/quickstart" target="_blank" rel="noopener">Actions CI</a> on the tests · monthly timed FDE drill, graded</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Jun 14 – Aug 29 complete"></div>
     </div>
-
     <div class="wk" data-id="l3" data-start="2027-06-05" data-end="2027-06-26">
-      <div class="tick"><input type="checkbox" aria-label="Mark Project 2 complete"></div>
+      <div class="when">Saturdays · Jun</div>
       <div class="body">
-        <div class="when">Saturdays, June · Applied 301</div>
-        <h3>Project 2 — retrieval system, with a real web UI</h3>
-        <p>A RAG system over a corpus you care about, evaluated — and served through a <a href="https://nextjs.org/learn">Next.js</a> frontend on a FastAPI backend. Your first end-to-end full-stack app.</p>
+        <h3>Project 2 — RAG with a real web UI</h3>
+        <p class="res">Retrieval over a corpus you care about. <a href="https://nextjs.org/learn" target="_blank" rel="noopener">Next.js</a> front, FastAPI back — first full-stack app.</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Saturdays · Jun complete"></div>
     </div>
-
     <div class="wk" data-id="l4" data-start="2027-07-03" data-end="2027-08-28">
-      <div class="tick"><input type="checkbox" aria-label="Mark Project 3 complete"></div>
+      <div class="when">Saturdays · Jul–Aug</div>
       <div class="body">
-        <div class="when">Saturdays, Jul – Aug · Applied 301</div>
-        <h3>Project 3 — agent harness, trajectory-level evals, UI</h3>
-        <p>Tool calling, memory, retrieval loop — with evals that score the <em>trajectory</em> (right tools, right order, LLM-as-judge), not just the final answer. One Saturday: run <a href="https://github.com/EleutherAI/lm-evaluation-harness">lm-eval-harness</a> on your Project 1 model and publish before/after benchmark scores.</p>
+        <h3>Project 3 — agent harness</h3>
+        <p class="res">Tools, memory, retrieval — with trajectory-level evals. One Saturday: <a href="https://github.com/EleutherAI/lm-evaluation-harness" target="_blank" rel="noopener">lm-eval-harness</a> on your Project 1 model.</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Saturdays · Jul–Aug complete"></div>
     </div>
-
     <div class="wk finals" data-id="l5" data-start="2027-08-30" data-end="2027-09-05">
-      <div class="tick"><input type="checkbox" aria-label="Mark Term 4 finals complete"></div>
+      <div class="when">Finals</div>
       <div class="body">
-        <div class="when">Finals · week of Aug 30</div>
         <h3>Term 4 examinations</h3>
-        <p>CS336 tokenizer rebuilt cold + a leaderboard perplexity submission. Oral: scaling laws, mixture of experts, why attention, KV cache, quantization tradeoffs.</p>
+        <p class="res">Tokenizer rebuilt cold + leaderboard perplexity. Oral: scaling laws, MoE, KV cache, quantization.</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Term 4 finals complete"></div>
     </div>
   </details>
-
-  <!-- ================= TERM 5 ================= -->
   <details class="term" id="term5">
     <summary>
       <div>
@@ -465,62 +439,56 @@
     </summary>
 
     <div class="wk" data-id="r1" data-start="2027-09-06" data-end="2027-09-26">
-      <div class="tick"><input type="checkbox" aria-label="Mark Silver RL complete"></div>
+      <div class="when">Sep 6–26</div>
       <div class="body">
-        <div class="when">Sep 6–26 · RL 401</div>
-        <h3>David Silver's RL course</h3>
-        <p>All ten lectures. The foundations everything RL-flavored stands on.</p>
-        <div class="engline"><b>ENG 30:</b> <a href="https://www.oreilly.com/library/view/designing-machine-learning-systems/9781098107956/">Chip Huyen, “Designing ML Systems”</a> — free via your O'Reilly access. Chapters 1–2.</div>
+        <h3>David Silver&rsquo;s RL course</h3>
+        <p class="res">All ten lectures — the foundations everything RL stands on.</p>
+        <p class="eng"><span class="etag">ENG 30</span><a href="https://www.oreilly.com/library/view/designing-machine-learning-systems/9781098107956/" target="_blank" rel="noopener">Chip Huyen, DMLS</a> ch. 1–2, via your O&rsquo;Reilly</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Sep 6–26 complete"></div>
     </div>
-
     <div class="wk" data-id="r2" data-start="2027-09-27" data-end="2027-10-31">
-      <div class="tick"><input type="checkbox" aria-label="Mark CS285 complete"></div>
+      <div class="when">Sep 27 – Oct 31</div>
       <div class="body">
-        <div class="when">Sep 27 – Oct 31 · RL 402</div>
         <h3>Berkeley CS285 — Deep RL</h3>
-        <p>Levine. Policy gradients through offline RL — the course that makes RLHF papers readable.</p>
-        <div class="engline"><b>ENG 30:</b> DMLS chapters 3–7, one a week — data engineering through evaluation.</div>
+        <p class="res">Levine. The course that makes RLHF papers readable.</p>
+        <p class="eng"><span class="etag">ENG 30</span>DMLS ch. 3–7, one a week</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Sep 27 – Oct 31 complete"></div>
     </div>
-
     <div class="wk" data-id="r3" data-start="2027-10-02" data-end="2027-10-30">
-      <div class="tick"><input type="checkbox" aria-label="Mark systems block complete"></div>
+      <div class="when">Saturdays · Oct</div>
       <div class="body">
-        <div class="when">Saturdays, October · Systems 401</div>
         <h3>MIT 6.5940 — Efficient ML</h3>
-        <p>Quantization, pruning, distillation. GPU MODE lectures as supplements.</p>
+        <p class="res">Quantization, pruning, distillation. GPU MODE as supplement.</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Saturdays · Oct complete"></div>
     </div>
-
     <div class="wk" data-id="r4" data-start="2027-11-01" data-end="2027-11-14">
-      <div class="tick"><input type="checkbox" aria-label="Mark seminar tier complete"></div>
+      <div class="when">Nov 1–14</div>
       <div class="body">
-        <div class="when">Nov 1–14 · Seminar tier</div>
-        <h3>Berkeley CS294 LLM Agents · Stanford CS25</h3>
-        <p class="quiet">Watch selectively — frontier guest talks, chosen by relevance.</p>
-        <div class="engline"><b>ENG 30:</b> DMLS chapters 8–11 + first mock ML-system-design interview with Claude.</div>
+        <h3>Berkeley CS294 agents · Stanford CS25</h3>
+        <p class="res">Frontier guest talks, chosen by relevance.</p>
+        <p class="eng"><span class="etag">ENG 30</span>DMLS ch. 8–11 · first mock design interview</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Nov 1–14 complete"></div>
     </div>
-
     <div class="wk" data-id="r5" data-start="2027-11-15" data-end="2027-12-12">
-      <div class="tick"><input type="checkbox" aria-label="Mark capstone complete"></div>
+      <div class="when">Nov 15 – Dec 12</div>
       <div class="body">
-        <div class="when">Nov 15 – Dec 12 · Capstone</div>
-        <h3>The capstone — a full engagement, FDE-shaped</h3>
-        <p>Ambiguous business problem → scoping doc → working agent with a Next.js frontend, FastAPI backend, and Postgres → trajectory eval report → recorded 10-minute demo. One artifact that <em>is</em> the interview.</p>
-        <div class="deliv">Deliverable: deployed app + writeup good enough for a frontier-lab or FDE interviewer</div>
-        <div class="engline"><b>ENG 30:</b> Weekly mock design interviews with Claude — one system per week, graded.</div>
+        <h3>The capstone — a full engagement</h3>
+        <p class="res">Ambiguous problem → scoping doc → agent with Next.js + FastAPI + Postgres → trajectory eval report → 10-minute recorded demo. <span class="ship">→ ships a deployed, interview-grade artifact</span></p>
+        <p class="eng"><span class="etag">ENG 30</span>weekly mock design interviews</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark Nov 15 – Dec 12 complete"></div>
     </div>
-
     <div class="wk finals" data-id="r6" data-start="2027-12-13" data-end="2027-12-31">
-      <div class="tick"><input type="checkbox" aria-label="Mark graduation complete"></div>
+      <div class="when">Dec 13–17</div>
       <div class="body">
-        <div class="when">Graduation · Dec 13–17</div>
-        <h3>The fifteen-month oral exam</h3>
-        <p>Everything, across the whole program. Then we talk applications — because by now the transcript is real. Holidays after: earned.</p>
+        <h3>Graduation — the fifteen-month oral</h3>
+        <p class="res">Everything, across the whole program. Then: applications. The transcript is real now.</p>
       </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark graduation complete"></div>
     </div>
   </details>
 </section>
