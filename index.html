@@ -56,6 +56,15 @@
   .today .where{font-family:'Newsreader',serif;font-size:17px;font-weight:500}
   .today .date{opacity:.75;font-size:13px}
 
+  /* ---------- tabs ---------- */
+  .tabbar{display:flex;gap:30px;margin-top:54px;border-bottom:1px solid var(--hair)}
+  .tab{appearance:none;background:none;border:none;cursor:pointer;text-align:left;
+    font-family:'Newsreader',serif;font-size:20px;font-weight:600;color:var(--muted);
+    padding:0 2px 12px;border-bottom:2.5px solid transparent;margin-bottom:-1px}
+  .tab.active{color:var(--ink);border-bottom-color:var(--cardinal)}
+  .tab small{display:block;font-family:'Inter',system-ui,sans-serif;font-size:10.5px;font-weight:500;letter-spacing:.06em;color:var(--muted);margin-top:3px;text-transform:uppercase}
+  #view-depth>section:first-child,#view-breadth>section:first-child{margin-top:30px}
+
   /* ---------- section basics ---------- */
   section{margin-top:52px}
   h2{
@@ -87,6 +96,9 @@
   .eng{margin-top:6px;font-size:13px;color:var(--muted);line-height:1.55}
   .etag{font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A6410;background:rgba(200,146,50,.13);border-radius:3px;padding:2px 6px;margin-right:8px;vertical-align:1px}
   .wknote{margin-top:6px;font-size:12.5px;color:var(--muted);font-style:italic}
+  .items{margin:6px 0 0 18px;padding:0;font-size:13.5px;color:#4A453E;line-height:1.65}
+  .items li{margin:3px 0}
+  .hrs{color:var(--muted);font-weight:400;font-size:14px;margin-left:8px;font-family:'Inter',system-ui,sans-serif}
   .chev{
     flex:none;margin-top:8px;width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);
     transform:rotate(45deg);transition:transform .18s ease;
@@ -187,6 +199,12 @@
   <p class="note">Attendance policy: miss a day, don't double up — continue. Streaks beat catch-up. Two missed weeks means we re-plan, not cram.</p>
 </section>
 
+<div class="tabbar" role="tablist">
+  <button class="tab active" data-view="depth" role="tab">Depth<small>the degree · dated</small></button>
+  <button class="tab" data-view="breadth" role="tab">Breadth<small>second voices · self-paced</small></button>
+</div>
+
+<div id="view-depth">
 <section id="terms">
   <h2>The academic year</h2>
   <p class="h2sub">Tap a term to open it; tick weeks as they fall.</p>
@@ -491,6 +509,7 @@
       <div class="tick"><input type="checkbox" aria-label="Mark graduation complete"></div>
     </div>
   </details>
+
 </section>
 
 <section id="eng30">
@@ -505,6 +524,104 @@
   </div>
   <p class="note">No LeetCode. Karpathy and CS336 are the real Python practice; this slot covers what they don't. The week card you're in always names the exact assignment.</p>
 </section>
+</div>
+
+<div id="view-breadth" hidden>
+<section id="breadth">
+  <h2>Ten courses to rule them all</h2>
+  <p class="h2sub">Ten whole video courses, in order, one at a time — each owns a domain, none overlaps Depth. Roughly 240 hours across the same fifteen months in dead time and spare evenings, never desk hours. Watch, don&rsquo;t do; Depth owns the exercises.</p>
+
+    <div class="wk" data-id="x3">
+      <div class="when">Start</div>
+      <div class="body">
+        <h3>CMU 11-711 — Advanced NLP · Graham Neubig</h3>
+        <p class="res"><a href="https://phontron.com/class/anlp2024/" target="_blank" rel="noopener">Course site</a> · ~25 hrs. Language models end to end, refreshed yearly — this year&rsquo;s conversation topics, taught rigorously. The right opener.</p>
+      </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark x3 complete"></div>
+    </div>
+
+    <div class="wk" data-id="x2">
+      <div class="when">DL</div>
+      <div class="body">
+        <h3>Michigan EECS 498 — Deep Learning for Computer Vision · Justin Johnson</h3>
+        <p class="res"><a href="https://web.eecs.umich.edu/~justincj/teaching/eecs498/" target="_blank" rel="noopener">Course site</a> · ~22 hrs. Deep learning done properly, by CS231n&rsquo;s co-creator — the fundamentals plus the entire vision story.</p>
+      </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark x2 complete"></div>
+    </div>
+
+    <div class="wk" data-id="x4">
+      <div class="when">School 2</div>
+      <div class="body">
+        <h3>NYU — Deep Learning · Yann LeCun &amp; Alfredo Canziani</h3>
+        <p class="res"><a href="https://atcold.github.io/NYU-DLSP21/" target="_blank" rel="noopener">Course site</a> · ~30 hrs. The other school of thought — energy-based models, self-supervised learning — from the founder himself.</p>
+      </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark x4 complete"></div>
+    </div>
+
+    <div class="wk" data-id="x5">
+      <div class="when">Generative</div>
+      <div class="body">
+        <h3>Stanford CS236 — Deep Generative Models · Stefano Ermon</h3>
+        <p class="res"><a href="https://deepgenerativemodels.github.io/" target="_blank" rel="noopener">Course site</a> · ~25 hrs. VAEs, GANs, flows, diffusion — everything behind image, video, and audio generation.</p>
+      </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark x5 complete"></div>
+    </div>
+
+    <div class="wk" data-id="x6">
+      <div class="when">Robotics</div>
+      <div class="body">
+        <h3>Princeton MAE 345 — Introduction to Robotics · Anirudha Majumdar</h3>
+        <p class="res"><a href="https://www.youtube.com/@intro-to-robotics" target="_blank" rel="noopener">Lecture videos</a> · ~25 hrs. Feedback control, motion planning, state estimation and mapping, vision and learning — the whole field in one true introduction, on real drones.</p>
+      </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark x6 complete"></div>
+    </div>
+
+    <div class="wk" data-id="x7">
+      <div class="when">Hardware</div>
+      <div class="body">
+        <h3>ETH Zürich — Computer Architecture · Onur Mutlu</h3>
+        <p class="res"><a href="https://www.youtube.com/@OnurMutluLectures" target="_blank" rel="noopener">Lectures</a> · watch the GPU, memory, and accelerator half, ~15 hrs. Why AI runs on GPUs and what a TPU actually is, from the most-watched architecture lecturer online.</p>
+      </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark x7 complete"></div>
+    </div>
+
+    <div class="wk" data-id="x8">
+      <div class="when">Theory</div>
+      <div class="body">
+        <h3>Caltech CS156 — Learning from Data · Yaser Abu-Mostafa</h3>
+        <p class="res"><a href="https://work.caltech.edu/telecourse" target="_blank" rel="noopener">18 lectures</a> · ~18 hrs. Why any of it works: VC theory, generalization, overfitting. Placed here, after the landscape, so the question is interesting.</p>
+      </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark x8 complete"></div>
+    </div>
+
+    <div class="wk" data-id="x9">
+      <div class="when">Probability</div>
+      <div class="body">
+        <h3>Harvard Stat 110 — Probability · Joe Blitzstein</h3>
+        <p class="res"><a href="https://projects.iq.harvard.edu/stat110" target="_blank" rel="noopener">Course site</a> · ~40 hrs. The foundation under all of it, taught by its most beloved lecturer. Dip in by topic.</p>
+      </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark x9 complete"></div>
+    </div>
+
+    <div class="wk" data-id="x1">
+      <div class="when">Applied</div>
+      <div class="body">
+        <h3>Udemy — AI Engineer Core Track: LLM Engineering, RAG, QLoRA, Agents · Ed Donner</h3>
+        <p class="res">In Udemy Business · 33.5 hrs, 210 lectures. Skim, don&rsquo;t study: APIs, RAG, agents, fine-tuning — much of it you already live at work. Take the corners you haven&rsquo;t touched, skip the rest.</p>
+      </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark x1 complete"></div>
+    </div>
+
+    <div class="wk" data-id="x10">
+      <div class="when">Build</div>
+      <div class="body">
+        <h3>fast.ai — Practical Deep Learning for Coders · Jeremy Howard</h3>
+        <p class="res"><a href="https://course.fast.ai" target="_blank" rel="noopener">course.fast.ai</a> · ~15 hrs. The build-it-all close: top-down, working models every lesson — far more satisfying once you know why they work.</p>
+      </div>
+      <div class="tick"><input type="checkbox" aria-label="Mark x10 complete"></div>
+    </div>
+</section>
+</div>
 
 <section id="rules">
   <h2>Standing rules</h2>
@@ -618,6 +735,19 @@
     });
   });
   load();
+
+  // ---- tabs ----
+  var tabs = document.querySelectorAll('.tab');
+  var views = {depth: document.getElementById('view-depth'), breadth: document.getElementById('view-breadth')};
+  function showTab(name){
+    Object.keys(views).forEach(function(k){ views[k].hidden = (k !== name); });
+    tabs.forEach(function(t){ t.classList.toggle('active', t.dataset.view === name); });
+    try{ localStorage.setItem('usc2-tab', name); }catch(e){}
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ showTab(t.dataset.view); }); });
+  var savedTab = null;
+  try{ savedTab = localStorage.getItem('usc2-tab'); }catch(e){}
+  if(savedTab === 'breadth'){ showTab('breadth'); }
 })();
 </script>
 </body>
